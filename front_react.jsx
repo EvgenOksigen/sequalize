@@ -1,0 +1,56 @@
+import React, { Component } from "react";
+import { Field } from "redux-form";
+import Axios from "axios";
+
+class App extends Component {
+  //
+  uploadHandler = e => {
+    console.log(e.target.files);
+    const fileList = e.target.files;
+    const reader = new FileReader();
+
+    reader.readAsDataURL(fileList[0]);
+    reader.onload = e => {
+      const fd = {
+        data: e.target.result,
+        name: fileList[0].name,
+        type: fileList[0].type
+      };
+
+      Axios.post("http://localhost:4444/api/users/upload-csv", fd).then(res => {
+        console.log(res.data);
+        return res.data;
+      });
+    };
+  };
+
+  getAll = () => {
+    let config = {
+      method: "GET",
+      url: "http://localhost:4444/api/users/all"
+    };
+    Axios(config).then(res => {
+      console.log(res.data);
+      return res;
+    });
+  };
+  download = () => {
+    window.open("http://localhost:4444/api/users/download-users-json");
+  };
+
+  render() {
+    return (
+      <div>
+        <input type="file" onChange={this.uploadHandler} />
+        <button type="button" onClick={this.getAll}>
+          GetAll
+        </button>
+        <button type="button" onClick={this.download}>
+          Download
+        </button>
+      </div>
+    );
+  }
+}
+
+export default App;
