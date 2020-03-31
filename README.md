@@ -9,4 +9,6 @@ clone repo
 *  6 in sequalize/ 
      - 1) @~ yarn/npm i 
      - 2) @~ yarn run dev 
+
+
 test
