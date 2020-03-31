@@ -11,4 +11,4 @@ clone repo
      - 2) @~ yarn run dev 
 
 
-test data -> def_users.csv
+test data -> sequalize/ _def_users.csv_
