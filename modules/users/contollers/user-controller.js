@@ -1,47 +1,24 @@
 import fs from 'fs'
-import path from 'path'
-import csvjson from 'csvjson'
 import User from '../../../models/user'
-
-const options = {
-  delimiter : ',',
-  quote     : '"'
-}
+import UserService from '../../../services/UserService'
+import FileUploadService from '../../../services/FileUploadService'
 
 export default {
 
   async getall(ctx){
-    let allUsers = await User.findAll({attributes: ['id', 'user_name', 'last_name', 'first_name', "age"]})
-
-      return ctx.body = {allUsers}
+    const {allUsers} = await UserService.getAllUsers()
+    
+    return ctx.body = {allUsers}
   },
 
   async uploadCsv(ctx){
     try{
-
       //get a encoding string with instructions 
-      const {data, name, type} = ctx.request.body
-      // take a code information string
-      let toDecode = data.split(',')[1]
-      // take a algorithm of encode/decode
-      let algorithm = data.split(',')[0].split(';')[1]
-      // decode from base64 string with algorithm
-      let decode = new Buffer.from(toDecode, algorithm);
-      //write a file
-      fs.writeFileSync(`${name}`, decode);
-      
-      let data_csv = fs.readFileSync(path.join('users.csv'),{encoding: "utf8"})
-      
-      let data_json = csvjson.toObject(data_csv, options)
-
-      data_json.map( p => User.findOrCreate({
-        where:{
-          user_name:p.username,
-          first_name:p.firstname,
-          last_name:p.lastname,
-          age:p.age
-        }
-      }))
+      const {data, name} = ctx.request.body
+      //upload file on server
+      const {dataJSON} = FileUploadService.uploadFile(data, name)
+      //convert to JSON
+      UserService.setUsersFromJSON(dataJSON)
 
       return ctx.body = 'OK'
 
@@ -51,21 +28,14 @@ export default {
   },
 
   async downloadUsersJSON(ctx){
-    let all = await User.findAll({attributes: ['id', 'user_name', 'last_name', 'first_name', "age"]})
-
-    let js_data = JSON.stringify(all)
-
-    fs.open('users.json', 'w', (err) => {
-      if(err) throw err;
-      console.log('File created');
-  });
-  
-    fs.writeFileSync('users.json',js_data)
-
-    ctx.set('Content-disposition', `attachment; filename=users.json`);
-    ctx.statusCode = 200;
-    
-    ctx.body = fs.createReadStream('users.json')
+    // get all users from db with attributes
+    const {allUsers} = await UserService.getAllUsers()
+    //take a filename uploaded file
+    let {fileName} = FileUploadService.writeFileToJSON(allUsers)
+    // set right header
+    ctx.attachment(fileName)
+    // start a download
+    ctx.body = fs.createReadStream(fileName)
   },
 
   async test(ctx){

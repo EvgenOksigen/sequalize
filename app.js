@@ -15,7 +15,7 @@ db
 const app = new Koa()
 
 app.use(async(ctx, next) => {
-  ctx.set("Access-Control-Allow-Origin", "http://localhost:4001"); // update to match the domain you will make the request from
+  ctx.set("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
   ctx.set("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type");
   await next()
 });

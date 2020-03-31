@@ -1,27 +1,36 @@
-import React, { Component } from "react";
-import { Field } from "redux-form";
+import React from "react";
 import Axios from "axios";
 
-class App extends Component {
+const App = () => {
   //
   uploadHandler = e => {
     console.log(e.target.files);
-    const fileList = e.target.files;
+    let fileList = e.target.files;
     const reader = new FileReader();
 
-    reader.readAsDataURL(fileList[0]);
-    reader.onload = e => {
-      const fd = {
-        data: e.target.result,
-        name: fileList[0].name,
-        type: fileList[0].type
-      };
+    if (fileList[0] && fileList[0].type !== "text/csv") {
+      alert("Only **.csv file format");
+      e.target.value = "";
+      return;
+    } else if (fileList && fileList[0]) {
+      reader.readAsDataURL(fileList[0]);
+      reader.onload = e => {
+        const fd = {
+          data: e.target.result,
+          name: fileList[0].name,
+          type: fileList[0].type
+        };
 
-      Axios.post("http://localhost:4444/api/users/upload-csv", fd).then(res => {
-        console.log(res.data);
-        return res.data;
-      });
-    };
+        Axios.post(
+          "http://localhost:4444/api/users/upload-csv",
+          fd
+          // e.target.result
+        ).then(res => {
+          console.log(res.data);
+          return res.data;
+        });
+      };
+    }
   };
 
   getAll = () => {
@@ -38,19 +47,17 @@ class App extends Component {
     window.open("http://localhost:4444/api/users/download-users-json");
   };
 
-  render() {
-    return (
-      <div>
-        <input type="file" onChange={this.uploadHandler} />
-        <button type="button" onClick={this.getAll}>
-          GetAll
-        </button>
-        <button type="button" onClick={this.download}>
-          Download
-        </button>
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <input type="file" onChange={this.uploadHandler} />
+      <button type="button" onClick={this.getAll}>
+        GetAll
+      </button>
+      <button type="button" onClick={this.download}>
+        Download
+      </button>
+    </div>
+  );
+};
 
 export default App;
