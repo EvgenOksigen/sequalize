@@ -11,4 +11,4 @@ clone repo
      - 2) @~ yarn run dev 
 
 
-test
+test data -> def_users.csv
