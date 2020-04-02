@@ -1,5 +1,6 @@
 import fs from 'fs'
 import User from '../../../models/user'
+import Profile from '../../../models/profile'
 import UserService from '../../../services/UserService'
 import FileUploadService from '../../../services/FileUploadService'
 
@@ -39,9 +40,25 @@ export default {
   },
 
   async test(ctx){
+    await User.create({user_name:'b', first_name:"Nashego", last_name:"Dvora", age:18})
+      .then( user=>{
+         Profile.create({user_name:`Profile ${user.user_name}`, age:user.age}).then(profile=>{
+          user.setProfile(profile)}).catch(e=>console.log(e))
+      }).catch(err=>console.log(err))
 
-    let allUsers = await User.findAll({attributes: ['id', 'user_name', 'last_name', 'first_name', "age"]})
+    await User.findOne({
+      where:{user_name:'b'},
+      attributes: ['id', 'user_name', 'last_name', 'first_name', "age"]
+    }).then(user=>{
+      console.log(user.dataValues);
+      user.getProfile({attributes: {
+        exclude: ['createdAt', 'updatedAt']
+      }}).then(profile=>{
+        console.log(profile.dataValues)
+      })
+    })
     
-    return ctx.body = {allUsers}
+    return ctx.body = 'ok'
+    // return ctx.body = {allUsers}
   }
 }
