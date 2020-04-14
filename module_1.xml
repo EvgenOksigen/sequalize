@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<test course="web" name="module_1">
+    <discipline>Web-программирование</discipline>
+    <title>Модуль №1</title>
+    <item cost="1">
+        <question>Что такое Redis?</question>
+        <answer right="true">Нереляционная СУБД типа ключ-значение</answer>
+        <answer right="false">Нереляционная СУБД объектного типа</answer>
+        <answer right="false">Реляционная СУБД типа ключ-значение</answer>
+        <answer right="false">Реляционная СУБД объектного типа</answer>
+    </item>
+    <item cost="2">
+        <question>Какого типа данных НЕ существует в Redis:</question>
+        <answer right="true">Сортированные списки</answer>
+        <answer right="false">Множества</answer>
+        <answer right="false">Сортированные множества</answer>
+        <answer right="false">Списки</answer>
+    </item>
+    <item cost="3">
+        <question>Какая из приведенных ниже команд создает строки с установленной "длительностью жизни"?</question>
+        <answer right="true">SETEX</answer>
+        <answer right="false">SETNX</answer>
+        <answer right="false">SET</answer>
+        <answer right="false">MSET</answer>
+    </item>
+    <item cost="4">
+        <question>Каким будет конечный результат после выполнения следующих команд:
+            LPUSH mylist "World"; LPUSHX mylist "Hello"; LPUSHX myotherlist "Hello"; LRANGE myotherlist 0 -1</question>
+        <answer right="true">(empty list or set)</answer>
+        <answer right="false">1) "Hello" 2) "World"</answer>
+        <answer right="false">1) "Hello" </answer>
+        <answer right="false">1) "World"</answer>
+    </item>
+    <item cost="1">
+        <question>Укажите неправильный вариант объявления переменной-значения:</question>
+        <answer right="true">val a: Byte = null</answer>
+        <answer right="false">val a: Int = 1</answer>
+        <answer right="false">val a: Long? = null</answer>
+        <answer right="false">val a = 1</answer>
+    </item>
+    <item cost="2">
+        <question>В каком из приведенных случаев в x можно записать null уже после объявления:</question>
+        <answer right="true">var x: Int?</answer>
+        <answer right="false">val x: Int?</answer>
+        <answer right="false">var x: Int</answer>
+        <answer right="false">val x: Int</answer>
+    </item>
+    <item cost="3">
+        <question>Найдите вывод строки, при котором произойдет ошибка:</question>
+        <answer right="true">println('Sum is ${x + y}')</answer>
+        <answer right="false">println("Sum is ${x + y}")</answer>
+        <answer right="false">println("Sum is $x + $y")</answer>
+        <answer right="false">println("Sum is " + x + y)</answer>
+    </item>
+    <item cost="4">
+        <question>Какой вызов функции будет ошибочным:</question>
+        <answer right="true">fun Some(x: Int? = null): Int {return x}</answer>
+        <answer right="false">fun Some(x: Int) = x + 2</answer>
+        <answer right="false">fun Some(x: Int): Int {val y = (0.23).toInt(); return y}</answer>
+        <answer right="false">fun Some(x: Int?): Int? {return null}</answer>
+    </item>
+    <item cost="1">
+        <question>Какая ОС чаще всего используется для работы сервера?</question>
+        <answer right="true">Linux</answer>
+        <answer right="false">Windows</answer>
+        <answer right="false">MacOS</answer>
+        <answer right="false">Solaris</answer>
+    </item>
+    <item cost="2">
+        <question>Выберите неправильное утверждение относительно Kotlin:</question>
+        <answer right="true">Kotlin не является компилируемым языком</answer>
+        <answer right="false">Kotlin может компилироваться в машинный код</answer>
+        <answer right="false">Kotlin может компилироваться в JavaScript</answer>
+        <answer right="false">Kotlin может компилироваться в байт-код для JVM</answer>
+    </item>
+    <item cost="3">
+        <question>С помощью какого принципа сервлет взаимодействует с клиентами?</question>
+        <answer right="true">Запрос-ответ</answer>
+        <answer right="false">Отправка и прием HTML-документов</answer>
+        <answer right="false">Параллельный обмен массивами данных</answer>
+        <answer right="false">Фиксированный набор кодов</answer>
+    </item>
+    <item cost="4">
+        <question>Что такое сервлет?</question>
+        <answer right="true">Интерфейс, реализация которого расширяет функциональные возможности сервера</answer>
+        <answer right="false">Полноценное и единое приложение, реализация которого расширяет функциональные возможности сервера</answer>
+        <answer right="false">Отдельный модуль, реализация которого расширяет функциональные возможности сервера</answer>
+        <answer right="false">Набор раздельных процедур, реализация которого расширяет функциональные возможности сервера</answer>
+    </item>
+    <item cost="1">
+        <question>Выберите НЕверное утверждение относительно работы с атрибутами (столбцами) таблиц в PostgreSQL:</question>
+        <answer right="true">Атрибуты (столбцы) неизменяемы в таблицах</answer>
+        <answer right="false">Атрибуты (столбцы) можно удалять из таблиц</answer>
+        <answer right="false">Атрибуты (столбцы) можно изменять в таблицах</answer>
+        <answer right="false">Атрибуты (столбцы) можно добавлять в таблицы</answer>
+    </item>
+    <item cost="2">
+        <question>Что такое JSON?</question>
+        <answer right="true">Текстовый формат обмена данными</answer>
+        <answer right="false">Язык разметки структур данных</answer>
+        <answer right="false">Язык описания запросов</answer>
+        <answer right="false">Формат записи вложенных структур</answer>
+    </item>
+    <item cost="3">
+        <question>Выберите правильный вариант написания JSON-данных:</question>
+        <answer right="true">{ "name": "John", "info": { "address": "London" }, "numbers": [ 1, 2, 3 ] }</answer>
+        <answer right="false">{ "name": "John", "info": [ "address": "London" ], "numbers": { 1, 2, 3 } }</answer>
+        <answer right="false">{ "name": "John", "info": [ "address": "London" ], "numbers": [ 1, 2, 3 ] }</answer>
+        <answer right="false">{ "name": "John", "info": { "address": "London" }, "numbers": { 1, 2, 3 } }</answer>
+    </item>
+    <item cost="4">
+        <question>Укажите правильный вариант поиска по шаблону только в начале строки:</question>
+        <answer right="true">SELECT * FROM table WHERE column LIKE 'some%';</answer>
+        <answer right="false">SELECT * FROM table WHERE column LIKE '%some';</answer>
+        <answer right="false">SELECT * FROM table WHERE column LIKE '_some%';</answer>
+        <answer right="false">SELECT * FROM table WHERE column LIKE '_some';</answer>
+    </item>
+    <item cost="1">
+        <question>Что такое JPA?</question>
+        <answer right="true">Спецификация API Java EE по взаимодействию с БД с помощью Java-объектов</answer>
+        <answer right="false">Библиотека Java EE по взаимодействию с БД с помощью Java-объектов</answer>
+        <answer right="false">Специальный язык в Java EE по взаимодействию с БД с помощью Java-объектов</answer>
+        <answer right="false">Фреймворк в Java EE по взаимодействию с БД с помощью Java-объектов</answer>
+    </item>
+    <item cost="2">
+        <question>Какой модуль в Spring Framework отвечает за работу с данными в БД?</question>
+        <answer right="true">Spring Data</answer>
+        <answer right="false">Spring Boost</answer>
+        <answer right="false">Spring DB</answer>
+        <answer right="false">Spring Web Flow</answer>
+    </item>
+    <item cost="3">
+        <question>Какая аннотация необходима для объявления класса сущностью в БД?</question>
+        <answer right="true">@Entity</answer>
+        <answer right="false">@Bean</answer>
+        <answer right="false">@Id</answer>
+        <answer right="false">@Mapping</answer>
+    </item>
+    <item cost="4">
+        <question>Выберите правильный вариант описания свойства-идентификатора класса-сущности:</question>
+        <answer right="true">@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+            val id: Long = 0</answer>
+        <answer right="false">val id: Long = 0
+            @Id @GeneratedValue(strategy = GenerationType.IDENTITY)</answer>
+        <answer right="false">@Id val id: Long = 0
+            @GeneratedValue(strategy = GenerationType.IDENTITY)</answer>
+        <answer right="false">val @id
+            @GeneratedValue(strategy = GenerationType.IDENTITY): Long = 0</answer>
+    </item>
+    <item cost="1">
+        <question>Что такое XML?</question>
+        <answer right="true">Язык разметки</answer>
+        <answer right="false">Язык программирования</answer>
+        <answer right="false">Язык формирования запросов</answer>
+        <answer right="false">Язык описания структур</answer>
+    </item>
+    <item cost="2">
+        <question>Что такое Gradle?</question>
+        <answer right="true">Система автоматической сборки проектов</answer>
+        <answer right="false">Библиотека Kotlin для сборки проектов</answer>
+        <answer right="false">Репозиторий модулей для сборки проектов</answer>
+        <answer right="false">Компилятор для больших проектов</answer>
+    </item>
+    <item cost="3">
+        <question>Какой оператор или дейтсвие необходимо применить к val x: String? для безопасного вызова свойства length (длина строки):</question>
+        <answer right="true">x?.length</answer>
+        <answer right="false">x?:length</answer>
+        <answer right="false">x!!.length</answer>
+        <answer right="false">x.length</answer>
+    </item>
+    <item cost="4">
+        <question>Выберите правильный вариант написания части XML-документа</question>
+        <answer right="true">&lt;test property="some"&gt;&lt;txt&gt;Lecture test&lt;/txt&gt;&lt;/test&gt;</answer>
+        <answer right="false">&lt;test property=some&gt;&lt;txt&gt;Lecture test&lt;/txt&gt;&lt;/test&gt;</answer>
+        <answer right="false">&lt;test property="some"&gt;&lt;txt&gt;Lecture test&lt;txt&gt;&lt;test&gt;</answer>
+        <answer right="false">&lt;test property='some'&gt;&lt;txt&gt;Lecture test&lt;txt&gt;&lt;test&gt;</answer>
+    </item>
+    <item cost="1">
+        <question>Что такое PostgreSQL?</question>
+        <answer right="true">Объектно-реляционная система управления базами данных</answer>
+        <answer right="false">Нереляционная система управления базами данных</answer>
+        <answer right="false">Объектно-реляционная база данных</answer>
+        <answer right="false">Нереляционная база данных</answer>
+    </item>
+    <item cost="2">
+        <question>Выберите правильный вариант объявления атрибута в виде строки с изменяемой длинной с обязательно непустым значением:</question>
+        <answer right="true">name Varchar(5) NOT NULL</answer>
+        <answer right="false">name Varchar(5)</answer>
+        <answer right="false">name Varchar 5</answer>
+        <answer right="false">name Varchar 5 NOT NULL</answer>
+    </item>
+    <item cost="3">
+        <question>Выберите правильный вариант запроса на чтение значений и упорядочиванием по атрибуту value</question>
+        <answer right="true">SELECT * FROM something ORDER BY value</answer>
+        <answer right="false">SELECT * FROM something GROUP BY value</answer>
+        <answer right="false">SELECT * FROM something WHERE value &gt; 0</answer>
+        <answer right="false">SELECT * FROM something WHERE value &lt; value - 1</answer>
+    </item>
+    <item cost="4">
+        <question>Какому типу соответсвуют операторы SELECT, INSERT, UPDATE и DELETE?</question>
+        <answer right="true">Data Manipulating Language - DML</answer>
+        <answer right="false">Data Control Language - DCL</answer>
+        <answer right="false">Data Definition Language - DDL</answer>
+        <answer right="false">Transaction Control Language - TCL</answer>
+    </item>
+</test>

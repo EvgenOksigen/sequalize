@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<test course="web" name="lecture_5">
+    <discipline>Web-программирование</discipline>
+    <title>Лекция №5</title>
+    <item cost="1">
+        <question>Что такое Redis?</question>
+        <answer right="true">Нереляционная СУБД типа ключ-значение</answer>
+        <answer right="false">Нереляционная СУБД объектного типа</answer>
+        <answer right="false">Реляционная СУБД типа ключ-значение</answer>
+        <answer right="false">Реляционная СУБД объектного типа</answer>
+    </item>
+    <item cost="2">
+        <question>Какого типа данных НЕ существует в Redis:</question>
+        <answer right="true">Сортированные списки</answer>
+        <answer right="false">Множества</answer>
+        <answer right="false">Сортированные множества</answer>
+        <answer right="false">Списки</answer>
+    </item>
+    <item cost="3">
+        <question>Какая из приведенных ниже команд создает строки с установленной "длительностью жизни"?</question>
+        <answer right="true">SETEX</answer>
+        <answer right="false">SETNX</answer>
+        <answer right="false">SET</answer>
+        <answer right="false">MSET</answer>
+    </item>
+    <item cost="4">
+        <question>Каким будет конечный результат после выполнения следующих команд:
+            LPUSH mylist "World"; LPUSHX mylist "Hello"; LPUSHX myotherlist "Hello"; LRANGE myotherlist 0 -1</question>
+        <answer right="true">(empty list or set)</answer>
+        <answer right="false">1) "Hello" 2) "World"</answer>
+        <answer right="false">1) "Hello" </answer>
+        <answer right="false">1) "World"</answer>
+    </item>
+</test>

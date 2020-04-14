@@ -1,8 +1,8 @@
 import fs from 'fs'
-import User from '../../../models/user'
-import Profile from '../../../models/profile'
 import UserService from '../../../services/UserService'
 import FileUploadService from '../../../services/FileUploadService'
+import Test from '../../../models/test'
+import convert from 'xml-js'
 
 export default {
 
@@ -40,25 +40,21 @@ export default {
   },
 
   async test(ctx){
-    await User.create({user_name:'b', first_name:"Nashego", last_name:"Dvora", age:18})
-      .then( user=>{
-         Profile.create({user_name:`Profile ${user.user_name}`, age:user.age}).then(profile=>{
-          user.setProfile(profile)}).catch(e=>console.log(e))
-      }).catch(err=>console.log(err))
-
-    await User.findOne({
-      where:{user_name:'b'},
-      attributes: ['id', 'user_name', 'last_name', 'first_name', "age"]
-    }).then(user=>{
-      console.log(user.dataValues);
-      user.getProfile({attributes: {
-        exclude: ['createdAt', 'updatedAt']
-      }}).then(profile=>{
-        console.log(profile.dataValues)
+    let xml = fs.readFileSync('lecture_5.xml')
+    let json = JSON.parse(convert.xml2json(xml, {compact:true, spaces:2}))
+    // await Test.create({test_json : json})
+    // console.log(...json.test.item);
+    let allTests = await Test.findAll()
+    let formData = allTests.map(el=>{
+      el.test_json.test.item.map(item=>{
+        item.answer.map(ans=>{
+          delete ans._attributes
+        })
       })
     })
+    console.log(formData);
     
-    return ctx.body = 'ok'
+    return ctx.body = allTests
     // return ctx.body = {allUsers}
   }
 }
