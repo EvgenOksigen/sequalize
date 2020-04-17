@@ -2,6 +2,7 @@ import fs from 'fs'
 import UserService from '../../../services/UserService'
 import FileUploadService from '../../../services/FileUploadService'
 import Test from '../../../models/test'
+import Course from '../../../models/course'
 import convert from 'xml-js'
 
 export default {
@@ -42,19 +43,74 @@ export default {
   async test(ctx){
     let xml = fs.readFileSync('lecture_5.xml')
     let json = JSON.parse(convert.xml2json(xml, {compact:true, spaces:2}))
-    // await Test.create({test_json : json})
-    // console.log(...json.test.item);
-    let allTests = await Test.findAll()
-    let formData = allTests.map(el=>{
+    let right_answer =[]
+
+    json.test.item.map(item=> {
+      item.answer.map(ans=>{
+        if (ans._attributes.right === 'true'){
+          return right_answer.push(ans._text)
+        }
+      })
+    })
+
+    await Test.create({
+      test_json : json,
+      right_answer:right_answer,
+      passed:false
+    }).then(async test=>{
+      await Course.create({
+        name: json.test._attributes.course
+      }).then(course=>test.setCourse(course))
+        .catch(e=>console.log(e))
+    }).catch(e=>console.log(e))
+
+    
+    let allTests = await Test.findAll({attributes: ["test_json"]});
+    allTests.map(el=>{
+      delete el.test_json._declaration
       el.test_json.test.item.map(item=>{
         item.answer.map(ans=>{
           delete ans._attributes
         })
       })
     })
-    console.log(formData);
     
     return ctx.body = allTests
-    // return ctx.body = {allUsers}
+  },
+
+  async testRight(ctx){
+    const mMap = new Map();
+    
+    let student_answ = ctx.request.body.answers;
+    let {right_answer} = await Test.findOne({attributes:['right_answer']})
+    let res = []
+    
+    student_answ.map((el,i)=>{
+      mMap.set(right_answer[i],el)
+    })
+
+    for (var [key, value] of mMap) {
+      res.push(key === value)
+    }
+    
+    await Test.update({passed:true}, {where:{right_answer:right_answer}})
+    ctx.body = [...res]
+  },
+
+  async testAll(ctx){
+    let allTests = await Test.findAll({where:{course_name:'web'},attributes:{
+      exclude:['right_answer', 'createdAt', 'updatedAt']
+    }})
+    allTests.map(el=>{
+      delete el.test_json._declaration
+      el.test_json.test.item.map(item=>{
+        item.answer.map(ans=>{
+          delete ans._attributes
+        })
+      })
+    })
+    ctx.body = allTests
+  },
+  async allCourse(ctx){
   }
 }

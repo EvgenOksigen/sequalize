@@ -8,11 +8,14 @@ const Test = db.define('test', {
     autoIncrement : true,
     primaryKey : true
   },
-  // discipline:{
-  //   type: Sequelize.STRING
-  // },
   test_json:{
     type: Sequelize.JSONB
+  },
+  right_answer:{
+    type: Sequelize.ARRAY(Sequelize.STRING)
+  },
+  passed : {
+    type: Sequelize.BOOLEAN
   }
 });
 

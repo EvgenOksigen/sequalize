@@ -13,8 +13,10 @@ import cors from 'koa-cors'
     console.error('Unable to connect to the database:', err);
   });
   
-  db.sync()
-
+  db.sync({force:true}).then(()=>{
+      console.log(db.models); 
+  })
+  
   const app = new Koa()
 
   app.use(cors())

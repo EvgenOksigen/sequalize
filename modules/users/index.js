@@ -10,5 +10,8 @@ router
   .post('/upload-csv', koaBody(), userController.uploadCsv)
   .get('/download-users-json', userController.downloadUsersJSON)
   .get('/test',  userController.test)
+  .post('/test-right', koaBody(), userController.testRight)
+  .get('/test/all',  userController.testAll)
+
 
 export default router.routes();
