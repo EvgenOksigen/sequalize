@@ -17,10 +17,15 @@ export default {
     try{
       //get a encoding string with instructions 
       const {data, name} = ctx.request.body
-      //upload file on server
-      const {dataJSON} = FileUploadService.uploadFile(data, name)
-      //convert to JSON
-      UserService.setUsersFromJSON(dataJSON)
+      console.log('____________________________________');
+      // console.log(ctx.request.params.image);
+      console.log(ctx.request.files.files[0]);
+      console.log('____________________________________');
+
+      // //upload file on server
+      // const {dataJSON} = FileUploadService.uploadFile(data, name)
+      // //convert to JSON
+      // UserService.setUsersFromJSON(dataJSON)
 
       return ctx.body = 'OK'
 
@@ -53,6 +58,8 @@ export default {
       })
     })
 
+    console.log(json.test._attributes.course);
+    
     await Test.create({
       test_json : json,
       right_answer:right_answer,
@@ -98,8 +105,12 @@ export default {
   },
 
   async testAll(ctx){
-    let allTests = await Test.findAll({where:{course_name:'web'},attributes:{
-      exclude:['right_answer', 'createdAt', 'updatedAt']
+    let allTests = await Test.findAll({
+      where:{
+        course_name:'web'
+      },
+      attributes:{
+        exclude:['right_answer', 'createdAt', 'updatedAt']
     }})
     allTests.map(el=>{
       delete el.test_json._declaration
