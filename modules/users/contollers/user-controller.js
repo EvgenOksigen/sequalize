@@ -15,18 +15,16 @@ export default {
 
   async uploadCsv(ctx){
     try{
-      //get a encoding string with instructions 
+     /*  // get a encoding string with instructions 
       const {data, name} = ctx.request.body
+      //upload file on server
+      const {dataJSON} = FileUploadService.uploadFile(data, name)
+      //convert to JSON
+      UserService.setUsersFromJSON(dataJSON)
+      */
       console.log('____________________________________');
-      // console.log(ctx.request.params.image);
       console.log(ctx.request.files.files[0]);
       console.log('____________________________________');
-
-      // //upload file on server
-      // const {dataJSON} = FileUploadService.uploadFile(data, name)
-      // //convert to JSON
-      // UserService.setUsersFromJSON(dataJSON)
-
       return ctx.body = 'OK'
 
     }catch(error) {
